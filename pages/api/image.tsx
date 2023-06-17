@@ -5,6 +5,11 @@ export const config = {
   runtime: "edge",
 };
 
+console.log("Vercel url: ", process.env.NEXT_PUBLIC_VERCEL_URL);
+const BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL
+  ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
+  : "http://localhost:3000";
+
 const alice = fetch(
   new URL("../../assets/Alice-Regular.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer());
@@ -29,7 +34,7 @@ export default async function handler(req: NextRequest) {
           tw="flex justify-center items-center border w-[1080px] h-[1080px]"
           style={{
             fontFamily: "Alice",
-            backgroundImage: "url('http://localhost:3000/background-1.jpeg')",
+            backgroundImage: `url('${BASE_URL}/background-1.jpeg')`,
             backgroundSize: "cover",
           }}
         >
